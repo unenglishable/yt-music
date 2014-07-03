@@ -1,0 +1,31 @@
+#!/bin/bash
+if [ $# -ne 1 ]
+then
+  echo 'Usage:  yt-music [URL]'
+  exit
+else
+  LINK="$1"
+fi
+
+echo "Getting: $LINK"
+if youtube-dl -x -k $LINK;
+then
+  echo 'Download good...'
+else
+  echo 'Download failed.'
+  exit
+fi
+
+if [ ! -d audio ]
+then
+  mkdir audio
+fi
+if [ ! -d video ]
+then
+  mkdir video
+fi
+
+mv *.m4a audio
+mv *.mp4 video
+
+itunes-import audio/*.m4a
