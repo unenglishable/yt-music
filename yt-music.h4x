@@ -1,5 +1,5 @@
 #!/bin/bash
-if youtube-dl -x -k $@;
+if youtube-dl -x -k -o "$PWD/%(title)s.%(ext)s" $@;
 then
   echo 'Download good...'
 else
