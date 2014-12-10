@@ -1,14 +1,5 @@
 #!/bin/bash
-if [ $# -ne 1 ]
-then
-  echo 'Usage:  yt-music [URL]'
-  exit
-else
-  LINK="$1"
-fi
-
-echo "Getting: $LINK"
-if youtube-dl -x -k $LINK;
+if youtube-dl -x -k $@;
 then
   echo 'Download good...'
 else
