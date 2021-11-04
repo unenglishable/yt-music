@@ -14,6 +14,9 @@ do
   elif [ -d $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes/ ]
   then
     cp "$file" $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes/
+  elif [ -d $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes/ ]
+  then
+    cp "$file" $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes/
    else
      echo "NO DIRECTORY TO COPY TO"
   fi
