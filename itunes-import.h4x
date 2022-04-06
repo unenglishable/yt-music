@@ -11,6 +11,9 @@ do
   if [ -d $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes.localized/ ]
   then
     cp "$file" $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes.localized/
+  elif [ -d $HOME/Music/Music/Media.localized/Automatically\ Add\ to\ Music.localized ]
+  then
+    cp "$file" $HOME/Music/Music/Media.localized/Automatically\ Add\ to\ Music.localized
   elif [ -d $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes/ ]
   then
     cp "$file" $HOME/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes/
