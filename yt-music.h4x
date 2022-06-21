@@ -1,5 +1,5 @@
 #!/bin/bash
-if youtube-dl -x --download-archive $PWD/archive --audio-format m4a -f bestaudio -o "$PWD/%(title)s.%(ext)s" $@;
+if yt-dlp -x --download-archive $PWD/archive --audio-format m4a -f bestaudio -o "$PWD/%(title)s.%(ext)s" $@;
 then
   echo 'Download good...'
 else
