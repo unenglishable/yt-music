@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set vars
-if [ ! -d $YT_MUSIC_DIR ]
+if [ -z "$YT_MUSIC_DIR" ] || [ ! -d "$YT_MUSIC_DIR" ]
 then
   YT_MUSIC_DIR=$HOME/youtube
 fi
