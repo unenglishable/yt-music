@@ -11,6 +11,7 @@ YT_MUSIC_AUDIO=$YT_MUSIC_DIR/audio
 YT_MUSIC_VIDEO=$YT_MUSIC_DIR/video
 
 # ensure directories exist
+mkdir -p $YT_MUSIC_DIR
 mkdir -p $YT_MUSIC_CACHE
 mkdir -p $YT_MUSIC_AUDIO
 mkdir -p $YT_MUSIC_VIDEO
