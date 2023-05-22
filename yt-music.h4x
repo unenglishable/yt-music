@@ -26,8 +26,8 @@ fi
 
 # move audio files to audio dir
 # and all remaining files to video dir
-mv $YT_MUSIC_CACHE/*.m4a $YT_MUSIC_AUDIO
-mv $YT_MUSIC_CACHE/* $YT_MUSIC_VIDEO
+mv $YT_MUSIC_CACHE/*.m4a $YT_MUSIC_AUDIO; true
+mv $YT_MUSIC_CACHE/* $YT_MUSIC_VIDEO; true
 
 # import audio files
-itunes-import $YT_MUSIC_AUDIO/*.m4a
+itunes-import $YT_MUSIC_AUDIO/*.m4a; true
