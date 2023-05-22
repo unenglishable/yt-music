@@ -1,5 +1,21 @@
 #!/bin/bash
-if yt-dlp -x --download-archive $PWD/archive --audio-format m4a -f bestaudio -o "$PWD/%(title)s.%(ext)s" $@;
+
+# set vars
+if [ ! -d $YT_MUSIC_DIR ]
+then
+  YT_MUSIC_DIR=$HOME/youtube
+fi
+YT_MUSIC_ARCHIVE=$YT_MUSIC_DIR/archive
+YT_MUSIC_CACHE=$YT_MUSIC_DIR/cache
+YT_MUSIC_AUDIO=$YT_MUSIC_DIR/audio
+YT_MUSIC_VIDEO=$YT_MUSIC_DIR/video
+
+# ensure directories exist
+mkdir -p $YT_MUSIC_CACHE
+mkdir -p $YT_MUSIC_AUDIO
+mkdir -p $YT_MUSIC_VIDEO
+
+if yt-dlp -x --download-archive $YT_MUSIC_ARCHIVE --audio-format m4a -f bestaudio -o "$YT_MUSIC_CACHE/%(title)s.%(ext)s" $@;
 then
   echo 'Download good...'
 else
@@ -7,16 +23,10 @@ else
   exit
 fi
 
-if [ ! -d audio ]
-then
-  mkdir audio
-fi
-if [ ! -d video ]
-then
-  mkdir video
-fi
+# move audio files to audio dir
+# and all remaining files to video dir
+mv $YT_MUSIC_CACHE/*.m4a $YT_MUSIC_AUDIO
+mv $YT_MUSIC_CACHE/* $YT_MUSIC_VIDEO
 
-mv *.m4a audio
-mv *.mp4 video
-
-itunes-import audio/*.m4a
+# import audio files
+itunes-import $YT_MUSIC_AUDIO/*.m4a
