@@ -22,8 +22,8 @@ mkdir -p $YT_MUSIC_LOGS
 YT_MUSIC_LOGFILE=$YT_MUSIC_LOGS/error_log.txt
 exec 2>$YT_MUSIC_LOGFILE
 
-# log input to logfile
-echo $@ > $YT_MUSIC_LOGFILE
+# log input to stderr (written to logfile)
+>&2 echo "INPUT: $@"
 
 # upgrade yt-dlp
 yt-dlp -U
