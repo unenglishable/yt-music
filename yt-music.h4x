@@ -9,18 +9,34 @@ YT_MUSIC_ARCHIVE=$YT_MUSIC_DIR/archive
 YT_MUSIC_CACHE=$YT_MUSIC_DIR/cache
 YT_MUSIC_AUDIO=$YT_MUSIC_DIR/audio
 YT_MUSIC_VIDEO=$YT_MUSIC_DIR/video
+YT_MUSIC_LOGS=$YT_MUSIC_DIR/logs
 
 # ensure directories exist
 mkdir -p $YT_MUSIC_DIR
 mkdir -p $YT_MUSIC_CACHE
 mkdir -p $YT_MUSIC_AUDIO
 mkdir -p $YT_MUSIC_VIDEO
+mkdir -p $YT_MUSIC_LOGS
+
+# direct error output to log file
+YT_MUSIC_LOGFILE=$YT_MUSIC_LOGS/error_log.txt
+exec 2>$YT_MUSIC_LOGFILE
+
+# log input to logfile
+echo $@ > $YT_MUSIC_LOGFILE
+
+# upgrade yt-dlp
+yt-dlp -U
 
 if yt-dlp -x --download-archive $YT_MUSIC_ARCHIVE --audio-format m4a -f bestaudio -o "$YT_MUSIC_CACHE/%(title)s.%(ext)s" $@;
 then
   echo 'Download good...'
 else
-  echo 'Download failed.'
+  ERROR_LOG_CAT=$(cat $YT_MUSIC_LOGFILE)
+  # note download failure or
+  # open the log file if no terminal set
+  [ -t 1 ] && echo "Download failed. $ERROR_LOG_CAT"  || open $YT_MUSIC_LOGFILE
+  # and exit
   exit
 fi
 
